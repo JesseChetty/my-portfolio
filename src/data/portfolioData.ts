@@ -167,9 +167,9 @@ export const servicesData = [
 ];
 
 export const contactInfo = {
-  email: 'hello@portfolio.dev',
-  phone: '+1 (555) 123-4567',
-  location: 'San Francisco, CA',
+  email: 'JesseChettyReal@gmail.com',
+  phone: '+27 0663718217',
+  location: 'Johannesburg, guateng',
   social: {
     github: 'https://github.com',
     linkedin: 'https://linkedin.com',
