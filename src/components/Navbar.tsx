@@ -1,7 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import { windowData } from "../data/portfolioData";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
+import { windowData } from '../data/portfolioData';
 
 interface NavbarProps {
   focusedIndex: number;
@@ -17,11 +17,11 @@ export const Navbar = ({ focusedIndex, onNavigate }: NavbarProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <div className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              <div className="text-xl font-bold gradient-primary bg-clip-text text-transparent">
                 Portfolio
               </div>
             </div>
-
+            
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 {windowData.map((item, index) => (
@@ -30,8 +30,8 @@ export const Navbar = ({ focusedIndex, onNavigate }: NavbarProps) => {
                     onClick={() => onNavigate(index)}
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                       index === focusedIndex
-                        ? "gradient-primary text-white shadow-elegant"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                        ? 'gradient-primary text-white shadow-elegant'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                     }`}
                   >
                     {item.title}
@@ -39,7 +39,7 @@ export const Navbar = ({ focusedIndex, onNavigate }: NavbarProps) => {
                 ))}
               </div>
             </div>
-
+            
             <div className="md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -55,8 +55,8 @@ export const Navbar = ({ focusedIndex, onNavigate }: NavbarProps) => {
       {/* Mobile menu */}
       {isOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
-          <div
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm"
+          <div 
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm" 
             onClick={() => setIsOpen(false)}
           />
           <div className="fixed top-0 right-0 h-full w-64 glass-effect p-6 animate-slide-in-right">
@@ -71,7 +71,7 @@ export const Navbar = ({ focusedIndex, onNavigate }: NavbarProps) => {
                 <FontAwesomeIcon icon={faTimes} />
               </button>
             </div>
-
+            
             <div className="space-y-4">
               {windowData.map((item, index) => (
                 <button
@@ -82,8 +82,8 @@ export const Navbar = ({ focusedIndex, onNavigate }: NavbarProps) => {
                   }}
                   className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 ${
                     index === focusedIndex
-                      ? "gradient-primary text-white shadow-elegant"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      ? 'gradient-primary text-white shadow-elegant'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                   }`}
                 >
                   {item.title}

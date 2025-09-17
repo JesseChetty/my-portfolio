@@ -13,9 +13,6 @@ export default {
       },
     },
     extend: {
-      backgroundImage: {
-        "gradient-primary": "linear-gradient(to right, #4f46e5, #3b82f6)", // purple → blue
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

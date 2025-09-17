@@ -10,31 +10,21 @@ interface CarouselProps {
 
 export const Carousel = ({ onCardClick, focusedIndex, onFocusChange }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const isNavigatingRef = useRef(false);
   const itemsRef = useRef<HTMLDivElement[]>([]);
+  const rafIdRef = useRef<number | null>(null);
 
-  const isNavigatingRef = useRef(false); // programmatic scroll
-  const isDraggingRef = useRef(false);   // during user swipe
-  const ignoreScrollRef = useRef(false);
-
-  const swipeStartXRef = useRef(0);
-  const swipeEndXRef = useRef(0);
-  const isPointerDownInsideRef = useRef(false);
-
-  const snapTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Scroll listener (only snaps after user interaction)
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
     const handleScroll = () => {
-      if (!isDraggingRef.current && !isNavigatingRef.current) return;
+      // Don't update focus during programmatic navigation
+      if (isNavigatingRef.current) return;
 
-      if (snapTimeoutRef.current) clearTimeout(snapTimeoutRef.current);
-
-      snapTimeoutRef.current = setTimeout(() => {
+      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = requestAnimationFrame(() => {
         if (!carousel) return;
-
         const containerCenter = carousel.scrollLeft + carousel.clientWidth / 2;
         let nearestIndex = 0;
         let minDistance = Infinity;
@@ -50,24 +40,14 @@ export const Carousel = ({ onCardClick, focusedIndex, onFocusChange }: CarouselP
         });
 
         onFocusChange(nearestIndex);
-      }, 150);
+        rafIdRef.current = null;
+      });
     };
 
     carousel.addEventListener('scroll', handleScroll);
     return () => carousel.removeEventListener('scroll', handleScroll);
   }, [onFocusChange]);
 
-  // Prevent drag selection / images
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-
-    const preventDrag = (e: DragEvent) => e.preventDefault();
-    carousel.addEventListener('dragstart', preventDrag);
-    return () => carousel.removeEventListener('dragstart', preventDrag);
-  }, []);
-
-  // Programmatic scroll (Navbar click)
   const scrollToCard = (index: number) => {
     const item = itemsRef.current[index];
     const carousel = carouselRef.current;
@@ -76,96 +56,30 @@ export const Carousel = ({ onCardClick, focusedIndex, onFocusChange }: CarouselP
     isNavigatingRef.current = true;
     item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
 
+    // Reset the flag after scrolling completes
     setTimeout(() => {
       isNavigatingRef.current = false;
     }, 600);
   };
 
+  // Scroll to card when focusedIndex changes externally (from navbar)
   useEffect(() => {
+    console.log('focusedIndex changed to:', focusedIndex);
     scrollToCard(focusedIndex);
   }, [focusedIndex]);
-
-  // Drag / swipe handling
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-
-    const onPointerDown = (e: PointerEvent) => {
-      // Only track if pointer starts inside carousel
-      isPointerDownInsideRef.current = true;
-      swipeStartXRef.current = e.clientX;
-      isDraggingRef.current = false;
-      ignoreScrollRef.current = true;
-    };
-
-    const onPointerMove = (e: PointerEvent) => {
-      if (!isPointerDownInsideRef.current) return;
-
-      const diff = e.clientX - swipeStartXRef.current;
-      if (Math.abs(diff) > 5) {
-        isDraggingRef.current = true;
-        swipeEndXRef.current = e.clientX;
-      }
-    };
-
-    const onPointerUp = () => {
-      if (!isPointerDownInsideRef.current) return;
-
-      if (isDraggingRef.current) {
-        const diff = swipeEndXRef.current - swipeStartXRef.current;
-
-        if (diff < -30) {
-          const nextIndex = Math.min(focusedIndex + 1, windowData.length - 1);
-          scrollToCard(nextIndex);
-          onFocusChange(nextIndex);
-        } else if (diff > 30) {
-          const prevIndex = Math.max(focusedIndex - 1, 0);
-          scrollToCard(prevIndex);
-          onFocusChange(prevIndex);
-        }
-      }
-
-      isDraggingRef.current = false;
-      isPointerDownInsideRef.current = false;
-      swipeStartXRef.current = 0;
-      swipeEndXRef.current = 0;
-
-      setTimeout(() => {
-        ignoreScrollRef.current = false;
-      }, 100);
-    };
-
-    const onClick = (e: MouseEvent) => {
-      if (isDraggingRef.current) e.preventDefault(); // prevent accidental click
-    };
-
-    carousel.addEventListener('pointerdown', onPointerDown);
-    carousel.addEventListener('pointermove', onPointerMove);
-    carousel.addEventListener('pointerup', onPointerUp);
-    carousel.addEventListener('pointerleave', onPointerUp);
-    carousel.addEventListener('click', onClick, true);
-
-    return () => {
-      carousel.removeEventListener('pointerdown', onPointerDown);
-      carousel.removeEventListener('pointermove', onPointerMove);
-      carousel.removeEventListener('pointerup', onPointerUp);
-      carousel.removeEventListener('pointerleave', onPointerUp);
-      carousel.removeEventListener('click', onClick, true);
-    };
-  }, [focusedIndex, onFocusChange]);
 
   return (
     <div className="relative h-screen overflow-hidden">
       <div
         ref={carouselRef}
-        className="carousel-snap flex h-full overflow-x-auto overflow-y-hidden scrollbar-hide pl-[10vw] pr-[10vw] select-none"
+        className="carousel-snap flex h-full overflow-x-auto overflow-y-hidden scrollbar-hide pl-[10vw] pr-[10vw]"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {windowData.map((data, index) => (
           <div
             key={data.id}
             ref={(el) => { if (el) itemsRef.current[index] = el; }}
-            className="carousel-item flex-shrink-0 w-[80vw] h-full flex items-center justify-center select-none"
+            className="carousel-item flex-shrink-0 w-[80vw] h-full flex items-center justify-center"
           >
             <Card
               data={data}
@@ -181,10 +95,7 @@ export const Carousel = ({ onCardClick, focusedIndex, onFocusChange }: CarouselP
         {windowData.map((_, index) => (
           <button
             key={index}
-            onClick={() => {
-              scrollToCard(index);
-              onFocusChange(index);
-            }}
+            onClick={() => scrollToCard(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === focusedIndex
                 ? 'bg-primary shadow-glow'

@@ -26,7 +26,7 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="Jesse Chetty - Full-Stack Developer & UI/UX Designer"
+        title="John Doe - Full-Stack Developer & UI/UX Designer"
         description="Experienced full-stack developer specializing in React, Node.js, and modern web technologies. View my portfolio of innovative projects and get in touch."
         keywords="full-stack developer, React developer, Node.js, web development, UI/UX design, portfolio"
         canonicalUrl="https://portfolio.dev"
