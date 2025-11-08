@@ -323,20 +323,23 @@ export const Modal = ({ isOpen, content, onClose }: ModalProps) => {
                   </div>
                 </div>
 
-                <div className="glass-effect rounded-xl p-6">
-                  <h3 className="text-xl font-semibold mb-4">Follow Me</h3>
-                  <div className="flex space-x-4">
-                    <a href={contactInfo.social.github} className="text-2xl text-primary hover:text-primary/80">
-                      <FontAwesomeIcon icon={faGithub} />
-                    </a>
-                    <a href={contactInfo.social.linkedin} className="text-2xl text-primary hover:text-primary/80">
-                      <FontAwesomeIcon icon={faLinkedin} />
-                    </a>
-                    <a href={contactInfo.social.twitter} className="text-2xl text-primary hover:text-primary/80">
-                      <FontAwesomeIcon icon={faTwitter} />
-                    </a>
-                  </div>
-                </div>
+{/*
+<div className="glass-effect rounded-xl p-6">
+  <h3 className="text-xl font-semibold mb-4">Follow Me</h3>
+  <div className="flex space-x-4">
+    <a href={contactInfo.social.github} className="text-2xl text-primary hover:text-primary/80">
+      <FontAwesomeIcon icon={faGithub} />
+    </a>
+    <a href={contactInfo.social.linkedin} className="text-2xl text-primary hover:text-primary/80">
+      <FontAwesomeIcon icon={faLinkedin} />
+    </a>
+    <a href={contactInfo.social.twitter} className="text-2xl text-primary hover:text-primary/80">
+      <FontAwesomeIcon icon={faTwitter} />
+    </a>
+  </div>
+</div>
+*/}
+
               </div>
 
               {/* Contact Form */}

@@ -201,9 +201,9 @@ export const contactInfo = {
   phone: '+27 66 371 8217',
   location: 'Johannesburg',
   social: {
-    github: 'https://github.com',
-    linkedin: 'https://linkedin.com',
-    twitter: 'https://twitter.com'
+    //github: 'https://github.com',
+    //linkedin: 'https://linkedin.com',
+    //twitter: 'https://twitter.com'
   }
 };
 
