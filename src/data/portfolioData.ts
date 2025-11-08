@@ -48,13 +48,13 @@ export const skillsData = [
   { name: 'React', level: 40, icon: 'react', category: 'Frontend' },
   { name: 'Next.js', level: 45, icon: 'code', category: 'Frontend' },
   { name: 'TypeScript', level: 55, icon: 'js', category: 'Language' },
-  { name: 'HTML', level: 65, icon: 'html5', category: 'Frontend' },
-  { name: 'CSS', level: 60, icon: 'css3', category: 'Styling' },
+  { name: 'HTML', level: 55, icon: 'html5', category: 'Frontend' },
+  { name: 'CSS', level: 55, icon: 'css3', category: 'Styling' },
   { name: 'Tailwind CSS', level: 58, icon: 'palette', category: 'Styling' },
 
   // Backend
   { name: 'Node.js', level: 57, icon: 'server', category: 'Backend' },
-  { name: 'Python', level: 68, icon: 'python', category: 'Language' },
+  { name: 'Python', level: 56, icon: 'python', category: 'Language' },
   { name: 'Database Design', level: 55, icon: 'database', category: 'Backend' },
   { name: 'API Development', level: 54, icon: 'cloud', category: 'Backend' },
   { name: 'Cloud Deployment', level: 53, icon: 'cloud', category: 'Backend' },
@@ -65,7 +65,7 @@ export const skillsData = [
   { name: 'End-to-end Development', level: 40, icon: 'layers', category: 'Full-Stack' },
 
   // Game Development
-  { name: 'Unreal Engine', level: 60, icon: 'gamepad', category: 'Game Dev' },
+  { name: 'Unreal Engine', level: 45, icon: 'gamepad', category: 'Game Dev' },
   { name: 'C++', level: 57, icon: 'c', category: 'Language' },
   { name: 'Blueprint', level: 65, icon: 'project-diagram', category: 'Game Dev' },
   { name: 'Blender', level: 45, icon: 'cube', category: 'Game Dev' },
@@ -74,7 +74,7 @@ export const skillsData = [
 
   // Other / Personal Projects
   { name: 'Java', level: 45, icon: 'coffee', category: 'Language' },
-  { name: 'VPS / Server Management', level: 67, icon: 'server', category: 'Other' },
+  { name: 'VPS / Server Management', level: 62, icon: 'server', category: 'Other' },
   { name: 'Troubleshooting & Hardware', level: 60, icon: 'tools', category: 'Other' }
 ];
 
