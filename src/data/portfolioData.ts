@@ -141,6 +141,14 @@ export const testimonialsData = [
     content: 'Cruz set up and managed our VPS with incredible professionalism. The server runs smoothly and securely, and communication throughout the process was excellent.',
     avatar: 'https://bluestormgifts.co.za/wp-content/uploads/2024/08/cropped-Blue-storm-Uv-print-logo-single.png', // placeholder avatar
     rating: 5
+  },
+  {
+    id: 2,
+    name: 'Nexzone Web Manager',
+    role: 'Web Manager, NexZone.co.za',
+    content: 'Cruz handled the setup and management of our VPS with great skill and professionalism. The server performs flawlessly and remains secure, and the communication from start to finish was clear and reliable.',
+    avatar: 'https://nexzone.co.za/wp-content/uploads/2025/09/cropped-Nex-Zone-Logo-Full-Colour-scaled-1-1024x123.png', // placeholder avatar
+    rating: 5
   }
 ];
 
@@ -177,11 +185,11 @@ export const servicesData = [
   {
     id: 5,
     title: 'Hands-On Tech Experience',
-    description: 'Learning through tinkering and problem-solving with guidance from my parents',
+    description: 'Learning through tinkering and problem-solving with guidance from my online community',
     icon: 'tools',
     features: [
-      'Fixing hardware, soldering, and understanding components with my dad',
-      'Exploring Java and web development with my mom',
+      'Fixing hardware, soldering, and understanding components',
+      'Exploring Java and web development',
       'Troubleshooting PC upgrades and learning from mistakes'
     ]
   },
