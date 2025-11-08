@@ -43,7 +43,7 @@ export const Card = ({ data, isFocused, onClick, onExplore }: CardProps) => {
       >
         <div className="absolute inset-0 gradient-hero" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-12">
-          <div className="mb-8 animate-glow-pulse">
+          <div className="animate-glow-pulse-slow">
             <FontAwesomeIcon icon={faStar} className="text-6xl text-primary" />
           </div>
           <h1 className="text-6xl md:text-8xl font-bold mb-6 text-gradient-primary animate-fade-in">
@@ -77,7 +77,7 @@ export const Card = ({ data, isFocused, onClick, onExplore }: CardProps) => {
       <div className="h-full flex flex-col items-center justify-center text-center">
         <div
           className={`mb-8 transition-all duration-300 ${
-            isFocused ? "animate-glow-pulse" : ""
+            isFocused ? "animate-glow-pulse-slow" : ""
           }`}
         >
           <FontAwesomeIcon

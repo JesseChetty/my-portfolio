@@ -57,6 +57,18 @@ All colors MUST be HSL.
   /* add more if you want: hero, card, etc. */
 }
 
+@keyframes glow-pulse-slow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(59,130,246,0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px rgba(59,130,246,0.9));
+  }
+}
+
+.animate-glow-pulse-slow {
+  animation: glow-pulse-slow 3s ease-in-out infinite; /* slower than hero */
+}
 
 @layer base {
   :root {
